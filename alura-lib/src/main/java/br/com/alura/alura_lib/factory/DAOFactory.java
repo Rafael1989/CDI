@@ -16,9 +16,9 @@ public class DAOFactory {
 	private EntityManager entityManager;
 	
 	@Produces
-	public <T> DAO<T> factory(InjectionPoint injectionPoint) {
+	public <T,I> DAO<T,I> factory(InjectionPoint injectionPoint) {
 		ParameterizedType parameterizedType = (ParameterizedType) injectionPoint.getType();
 		Class<T> classe = (Class<T>) parameterizedType.getActualTypeArguments()[0];
-		return new DAO<T>(classe,this.entityManager);
+		return new DAO<T,I>(classe,this.entityManager);
 	}
 }
